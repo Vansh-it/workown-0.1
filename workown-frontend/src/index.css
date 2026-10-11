@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-devanagari: "Noto Sans Devanagari", "Inter", system-ui, sans-serif;
+
+  /* Brand colors */
+  --color-canvas: #F7F3EA;
+  --color-canvas-dim: #F0EADD;
+  --color-surface: #FFFFFF;
+  --color-ink: #15201E;
+  --color-ink-soft: #4B5A57;
+  --color-ink-faint: #8A948F;
+
+  --color-primary-50: #EAF5F2;
+  --color-primary-100: #D1E9E3;
+  --color-primary-200: #A3D3C8;
+  --color-primary-300: #6FB8A9;
+  --color-primary-400: #3D9A87;
+  --color-primary-500: #0E7C6B;
+  --color-primary-600: #0B6558;
+  --color-primary-700: #094F45;
+  --color-primary-800: #073B34;
+  --color-primary-900: #052B26;
+
+  --color-navy-50: #EAEEF0;
+  --color-navy-400: #3C5A66;
+  --color-navy-500: #264653;
+  --color-navy-600: #1C3740;
+  --color-navy-700: #152A31;
+  --color-navy-800: #0E1D22;
+  --color-navy-900: #0A1519;
+
+  --color-coral-50: #FDF0EC;
+  --color-coral-100: #FBDCD1;
+  --color-coral-400: #ED8468;
+  --color-coral-500: #E76F51;
+  --color-coral-600: #D1573A;
+  --color-coral-700: #AC452D;
+
+  --color-amber-400: #F7B733;
+  --color-amber-500: #F2A30F;
+  --color-amber-600: #C9840C;
+
+  --color-green-500: #1E9E5A;
+  --color-green-600: #167E47;
+
+  --color-red-500: #E0483E;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 999px;
+
+  --shadow-soft: 0 1px 2px rgba(21, 32, 30, 0.04), 0 8px 24px -8px rgba(21, 32, 30, 0.12);
+  --shadow-lift: 0 4px 10px rgba(21, 32, 30, 0.06), 0 24px 48px -16px rgba(21, 32, 30, 0.22);
+  --shadow-card: 0 1px 1px rgba(21,32,30,0.03), 0 2px 8px rgba(21,32,30,0.06);
+
+  --ease-brand: cubic-bezier(.22,1,.36,1);
+}
+
+:root {
+  color-scheme: light;
+  --bg: var(--color-canvas);
+  --fg: var(--color-ink);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: var(--color-navy-800);
+  --fg: #F3F1EA;
+  --color-canvas: #12191B;
+  --color-canvas-dim: #0E1517;
+  --color-surface: #182224;
+  --color-ink: #F3F1EA;
+  --color-ink-soft: #B7C2BE;
+  --color-ink-faint: #76817D;
+  --color-primary-50: #0F2A26;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="hi"] body {
+  font-family: var(--font-devanagari);
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.2s var(--ease-brand) infinite;
+}
+
+/* Mobile bottom tab safe area & consistent touch targets */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Prevent horizontal overflow on small screens */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Consistent input zoom prevention on iOS */
+input, select, textarea {
+  font-size: 16px;
+}
+
+@media (min-width: 640px) {
+  input, select, textarea {
+    font-size: inherit;
+  }
+}
